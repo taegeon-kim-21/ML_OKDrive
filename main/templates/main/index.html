@@ -1,5 +1,5 @@
 
-{% comment %} <!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -9,12 +9,12 @@
 </head>
 <body>
     <div id="root"></div>
-    <script src="static/js/main.fe9dfb54.js"></script>
+    <script src="static/js/main.7f78b68c.js"></script>
 </body>
-</html>  {% endcomment %}
+</html>   
 
 
-
+{% comment %} 
  <!-- index.html -->
 {% load static %}
 <!DOCTYPE html>
@@ -39,18 +39,7 @@
         
     </nav>
     
-    {% comment %} <section class="gallery">
-        <!-- 이미지와 번역된 캡션만 반복해서 표시 -->
-        {% for image in images %}
-        <div class="image-card">
-            <img src="{{ image.image.url }}" alt="Uploaded Image">
-            <!-- 번역된 캡션만 표시 -->
-            {% if image.translated_caption %}
-                <p>{{ image.translated_caption }}</p>
-            {% endif %}
-        </div>
-        {% endfor %}
-    </section> {% endcomment %}
+   
     <section class="home-section">
         <div class="gallery-result">
             {% for image in images %}
@@ -66,4 +55,4 @@
         </div>
     </section>
 </body>
-</html> 
+</html>  {% endcomment %}

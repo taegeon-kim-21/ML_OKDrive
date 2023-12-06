@@ -29,6 +29,9 @@ router = DefaultRouter()
 router.register(r'images', ImageWithCaptionViewSet)
 
 urlpatterns = [
+    
+    path('api/', include(router.urls)),
+        
     path('admin/', admin.site.urls),
     #path ('', views.index, name='index'),
     #path('index/', views.index, name='index'),
@@ -36,7 +39,7 @@ urlpatterns = [
   
     path('', include('main.urls')), 
 
-     path('api/', include(router.urls)),
+
     
     #127.0.0.1:8000/NIC/
     path('NIC/', include('main.urls')), 
