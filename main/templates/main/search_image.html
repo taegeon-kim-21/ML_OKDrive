@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Images</title>
+    <link rel="stylesheet" href="{% static 'search.css' %}">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="{% url 'main:gallery' %}">Home</a></li>
+            <li><a href="{% url 'main:caption_view' %}">Upload</a></li>
+            <li><a href="{% url 'main:delete_page' %}">Delete</a></li>
+            <li><a href="{% url 'main:search_image' %}">Search</a></li>
+        </ul>
+    </nav>
+
+    <section class="search-section">
+        <form action="{% url 'main:search_image' %}" method="get" class="search-form">
+            <input type="text" placeholder="Search images..." name="query" class="search-input">
+            <button type="submit" class="search-button">Search</button>
+        </form>
+
+        <!-- 검색 결과 표시 영역 -->
+        <div class="search-results">
+            {% if images %}
+                {% for image in images %}
+                    <div class="image-card">
+                        <img src="{{ image.image.url }}" alt="Uploaded Image">
+                        <p>{{ image.translated_caption }}</p>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>No images found.</p>
+            {% endif %}
+        </div>
+    </section>
+</body>
+</html>

@@ -1,0 +1,78 @@
+/* 기존 스타일 유지 */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    color: white;
+    /* 좌우 여백은 크게 주고 싶어 퍼센트로 설정 */
+    padding: 1rem 10%;
+}
+
+.header-logo img {
+    width: auto; /* 너비는 자동으로 비율에 맞춰 설정됩니다 */
+    height: 100px; /* 로고의 높이를 40px로 설정 */
+    display: block;
+    margin: 0 auto; /* 로고를 중앙 정렬합니다 */
+}
+
+
+/* 네비게이션 링크들을 오른쪽 정렬 */
+nav ul {
+    list-style: none;
+    display: flex;
+    margin-left: auto; /* 이 부분이 ul을 오른쪽으로 밀어줍니다 */
+    
+}
+nav ul li {
+    padding: 0 2rem;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
+
+/* 검색 페이지와 유사한 스타일 적용 */
+.home-section {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 갤러리 결과 영역 */
+.gallery-result {
+    margin-top: 20px;
+    display: grid; /* 3개씩 표시하도록 그리드 설정 */
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+/* 이미지 카드 스타일 */
+.image-card {
+    border: 1px solid #ddd;
+    padding: 1rem;
+    text-align: center;
+}
+
+/* 업로드된 이미지 스타일 */
+.uploaded-image {
+    width: 100%; /* 이미지 너비를 카드에 맞춤 */
+    height: auto; /* 이미지 높이 자동 조정 */
+    margin-bottom: 1rem; /* 이미지와 캡션 사이 여백 */
+}
+
+/* 캡션 스타일 */
+.caption {
+    margin-bottom: 1rem;
+}

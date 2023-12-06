@@ -1,0 +1,85 @@
+/* 기존 스타일 유지 */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+/* 네비게이션 바 스타일 */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    color: white;
+    padding: 1rem 5%;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+}
+
+nav ul li {
+    padding: 0 2rem;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+}
+/* 검색 페이지와 유사한 스타일 적용 */
+.delete-section {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 갤러리 결과 영역 */
+.gallery-result {
+    margin-top: 20px;
+    display: grid; /* 3개씩 표시하도록 그리드 설정 */
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+/* 이미지 카드 스타일 */
+.image-card {
+    border: 1px solid #ddd;
+    padding: 1rem;
+    text-align: center;
+}
+
+/* 업로드된 이미지 스타일 */
+.uploaded-image {
+    width: 100%; /* 이미지 너비를 카드에 맞춤 */
+    height: auto; /* 이미지 높이 자동 조정 */
+    margin-bottom: 1rem; /* 이미지와 캡션 사이 여백 */
+}
+
+/* 캡션 스타일 */
+.caption {
+    margin-bottom: 1rem;
+}
+
+/* 삭제 버튼 스타일 */
+.delete-button {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    width: 100%; /* 버튼 너비를 카드에 맞춤 */
+    border-radius: 5px; /* 버튼 모서리 둥글게 처리 */
+    /*버튼이 카드 밑에 고정적인 위치를 가지도록 설정 */
+
+    margin-top: 0.5rem; /* 버튼과 캡션 사이의 여백 */
+}
+
+.delete-button:hover {
+    background-color: #cc0000;
+}

@@ -1,0 +1,92 @@
+/* 기존 스타일 유지 */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    color: white;
+    padding: 1rem;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+}
+
+nav ul li {
+    padding: 0 2rem;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.image-card {
+    border: 1px solid #ddd;
+    padding: 1rem;
+    text-align: center;
+}
+
+.image-card img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* 검색 페이지에 특화된 스타일 */
+.search-section {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.search-section form {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.search-section input[type="text"] {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.search-section button {
+    padding: 0.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin-left: 10px;
+}
+
+.search-section button:hover {
+    background-color: #0056b3;
+}
+
+.search-results {
+    margin-top: 20px;
+    display: grid; /* 3개씩 표시하도록 수정 */
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}

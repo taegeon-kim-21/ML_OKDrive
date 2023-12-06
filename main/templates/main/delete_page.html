@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Images</title>
+    <link rel="stylesheet" href="{% static 'delete_page.css' %}">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="{% url 'main:gallery' %}">Home</a></li>
+            <li><a href="{% url 'main:caption_view' %}">Upload</a></li>
+            <li><a href="{% url 'main:delete_page' %}">Delete</a></li>
+            <li><a href="{% url 'main:search_image' %}">Search</a></li>
+        </ul>
+    </nav>
+    <section class="delete-section">
+        <div class="gallery-result">
+            {% for image in images %}
+            <div class="image-card">
+                <img src="{{ image.image.url }}" alt="Uploaded Image" class="uploaded-image">
+                <div class="caption">
+                    {% if image.translated_caption %}
+                        <p>{{ image.translated_caption }}</p>
+                    {% endif %}
+                </div>
+                <form action="{% url 'main:delete_image' image.id %}" method="POST">
+                    {% csrf_token %}
+                    <button type="submit" class="delete-button">Delete</button>
+                </form>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+</body>
+</html>
