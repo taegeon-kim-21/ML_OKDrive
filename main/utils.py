@@ -69,7 +69,7 @@ def generate_caption(image_path, model, tokenizer, max_length, vgg_model):
 
 def translate_with_gpt(input_text):
     #openai.api_key = settings.OPENAI_API_KEY
-    openai.api_key = "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"
+    #openai.api_key = 
     model = "gpt-3.5-turbo"
     response = openai.ChatCompletion.create(
         model=model, messages=[{"role": "user", "content": input_text}]
