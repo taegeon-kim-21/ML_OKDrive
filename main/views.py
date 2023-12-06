@@ -13,14 +13,13 @@ from .models import ImageWithCaption
 
 
 from rest_framework import viewsets
-
 from .serializers import ImageWithCaptionSerializer
 
-
-# Create your views here.
-
+from django.core import serializers
+from django.http import JsonResponse
 
 from .utils import translate_with_gpt
+from django.views.decorators.csrf import csrf_exempt
 
 
 def index(request):
@@ -36,15 +35,43 @@ def save_image(image_file):
     return file_path
 
 
+# def caption_view(request):
+#     context = {'form': ImageUploadForm()}
+#     if request.method == 'POST':
+#         form = ImageUploadForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             image_file = form.cleaned_data['image']
+#             image_path = save_image(image_file)
+#             caption = generate_caption(image_path, model, tokenizer, max_length, vgg_model)
+#             # 캡션을 번역 명령과 함께 번역 함수에 전달
+#             translation_request = f"Translate to Korean: {caption}"
+#             translated_caption = translate_with_gpt(translation_request)
 
+#             # 새 ImageWithCaption 객체를 생성하고 저장합니다.
+#             image_instance = ImageWithCaption(
+#                 image=image_file,
+#                 caption=caption,
+#                 translated_caption=translated_caption
+#             )
+#             image_instance.save()
+
+#             context['caption'] = caption
+#             context['translated_caption'] = translated_caption
+#             context['image_url'] = image_instance.image.url
+
+
+#     return render(request, 'main/upload_image.html', context)
+
+
+@csrf_exempt
 def caption_view(request):
-    context = {'form': ImageUploadForm()}
     if request.method == 'POST':
         form = ImageUploadForm(request.POST, request.FILES)
         if form.is_valid():
             image_file = form.cleaned_data['image']
             image_path = save_image(image_file)
             caption = generate_caption(image_path, model, tokenizer, max_length, vgg_model)
+
             # 캡션을 번역 명령과 함께 번역 함수에 전달
             translation_request = f"Translate to Korean: {caption}"
             translated_caption = translate_with_gpt(translation_request)
@@ -57,11 +84,15 @@ def caption_view(request):
             )
             image_instance.save()
 
-            context['caption'] = caption
-            context['translated_caption'] = translated_caption
-            context['image_url'] = image_instance.image.url
-
-    return render(request, 'main/upload_image.html', context)
+            # JSON 응답 반환
+            return JsonResponse({
+                'translated_caption': translated_caption,
+                'image_url': image_instance.image.url
+            })
+    
+    # POST 요청이 아닌 경우 빈 폼을 반환
+    form = ImageUploadForm()
+    return render(request, 'main/upload_image.html', {'form': form})
 
 def gallery_view(request):
     images = ImageWithCaption.objects.all().order_by('-created_at')  # 최신 순으로 정렬
@@ -94,3 +125,21 @@ def search_image(request):
 class ImageWithCaptionViewSet(viewsets.ModelViewSet):
     queryset = ImageWithCaption.objects.all()
     serializer_class = ImageWithCaptionSerializer
+    
+def get_image_with_caption_data(request):
+    image_with_caption_data = ImageWithCaption.objects.all()
+    serialized_data = serializers.serialize('json', image_with_caption_data)
+    return JsonResponse({'data': serialized_data})
+
+
+def gallery_api_view(request):
+    images = ImageWithCaption.objects.all().order_by('-created_at')
+    serializer = ImageWithCaptionSerializer(images, many=True)
+    return JsonResponse(serializer.data, safe=False)
+
+@csrf_exempt
+def delete_api_image(request, image_id):
+    if request.method == "DELETE":
+        image = get_object_or_404(ImageWithCaption, id=image_id)
+        image.delete()
+        return JsonResponse({'status': 'success'}, status=204)

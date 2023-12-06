@@ -15,7 +15,7 @@ export interface IImageWithCaption {
 }
 
 // 이미지 데이터를 불러오는 함수
-export function getImages() {
+export function getImages2() {
   return axios.get<IImageWithCaption[]>("/api/images/")
     .then((response) => {
       // 응답에서 이미지 데이터 배열을 반환합니다.
@@ -27,3 +27,39 @@ export function getImages() {
       return []; // 에러가 발생한 경우 빈 배열을 반환할 수 있습니다.
     });
 }
+
+// api.js
+
+export function getImages() {
+  return axios.get("api/sortimages/")
+    .then(response => response.data)
+    .catch(error => {
+      console.error("Error fetching images:", error);
+      return [];
+    });
+}
+
+
+export const uploadImage = (imageFile: File) => {
+  const formData = new FormData();
+  formData.append("image", imageFile);
+
+  return axios.post("/api/upload", formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  }).then(response => response.data)
+    .catch(error => {
+      console.error("Error uploading image:", error);
+      throw error;
+    });
+};
+
+export const deleteImage = (imageId: number) => {
+  return axios.delete(`/api/delete_image/${imageId}/`)
+    .then(response => response.data)
+    .catch(error => {
+      console.error("Error deleting image:", error);
+      throw error;
+    });
+};
